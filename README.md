@@ -2,7 +2,27 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, clone the repo with the following git command:
+
+```bash
+git clone https://github.com/Seth-McKilla/covalent-dao.git
+```
+
+Second, open a terminal in the root directory of the project and run:
+
+```bash
+npm install
+```
+
+to install all the package dependencies for the project
+
+Third, create a .env.local file in the project root directory that includes your API key:
+
+```bash
+COVALENT_API_KEY=<YOUR API KEY>
+```
+
+Finally, run the development server:
 
 ```bash
 npm run dev
