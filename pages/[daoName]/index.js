@@ -1,12 +1,49 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useContext } from "react";
+import { Context } from "../../context";
+import Head from "next/head";
+import Image from "next/image";
 
-export default function Index() {
-  const router = useRouter();
+// Mui
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
-  useEffect(() => {
-    router.push(`${window.location}/dashboard`);
-  });
+// Layout
+import { DashboardLayout } from "../../layouts";
 
-  return <div />;
+export default function DaoDashboard() {
+  const {
+    state: { info },
+  } = useContext(Context);
+
+  return (
+    <div>
+      <Head>
+        <title>Covalent DAO Dashboard</title>
+        <meta name="description" content="DAO Analytics Dashboard" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <DashboardLayout>
+        <Grid item xs={12}>
+          {info && (
+            <div style={{ display: "flex" }}>
+              <Image
+                src={info.imgUrl}
+                height={50}
+                width={50}
+                alt={`${info.name}-logo`}
+              />
+              <Typography variant="h4" align="left" ml={1}>
+                {info.name}
+              </Typography>
+            </div>
+          )}
+        </Grid>
+      </DashboardLayout>
+    </div>
+  );
 }

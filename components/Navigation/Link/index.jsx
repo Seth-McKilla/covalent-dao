@@ -13,7 +13,8 @@ export default function Link({ title, icon }) {
     pathname,
     query: { daoName },
   } = useRouter();
-  const currentRoute = pathname.split("/").pop();
+  let currentRoute = pathname.split("/").pop();
+  if (currentRoute === "[daoName]") currentRoute = "dashboard";
 
   const isCurrentRoute = title === currentRoute;
   const theme = useTheme();
@@ -30,7 +31,11 @@ export default function Link({ title, icon }) {
   };
 
   return (
-    <NextLink href={`/${daoName}/${_.kebabCase(title)}`}>
+    <NextLink
+      href={`/${daoName}/${
+        currentRoute !== "dashboard" ? _.kebabCase(title) : ""
+      }`}
+    >
       <a>
         <ListItem button alignItems="flex-start" sx={styles.item}>
           <Icon sx={{ marginRight: 1 }}>{icon}</Icon>
