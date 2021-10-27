@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import daoList from "../constants/daoList";
 
 // Mui
 import Grid from "@mui/material/Grid";
@@ -60,17 +61,19 @@ export default function Home({ daos }) {
             {"<Insert brief project description here>"}
           </Typography>
           <Grid container spacing={2} mt={5}>
-            {daos.map((dao) => (
-              <Grid item xs={3} key={dao.contract_name}>
-                <DaoCard
-                  name={dao.contract_name}
-                  ticker={dao.contract_ticker_symbol}
-                  price={dao.quote_rate}
-                  address={dao.contract_address}
-                  imgUrl={dao.logo_url}
-                />
-              </Grid>
-            ))}
+            {daos.length === 0
+              ? "Error fetching DAOs"
+              : daos.map((dao) => (
+                  <Grid item xs={3} key={dao.contract_name}>
+                    <DaoCard
+                      name={dao.contract_name}
+                      ticker={dao.contract_ticker_symbol}
+                      price={dao.quote_rate}
+                      address={dao.contract_address}
+                      imgUrl={dao.logo_url}
+                    />
+                  </Grid>
+                ))}
           </Grid>
         </Grid>
       </LandingLayout>
@@ -79,8 +82,13 @@ export default function Home({ daos }) {
 }
 
 export async function getStaticProps() {
-  const daoNames = ["Uniswap", "Aave Token", "SushiToken", "Compound"];
-  const daoTickers = ["UNI", "AAVE", "SUSHI", "COMP"];
+  const daoNames = [];
+  const daoTickers = [];
+  daoList.map(({ contract_name, contract_ticker_symbol }) => {
+    daoNames.push(contract_name);
+    daoTickers.push(contract_ticker_symbol);
+  });
+
   let daos = [];
 
   const res = await fetch(
@@ -90,7 +98,7 @@ export async function getStaticProps() {
   );
   const { data } = await res.json();
 
-  if (!data) return;
+  if (!data) return { props: {} };
 
   // Remove duplicate tickers
   daos = data.items.filter(({ contract_name }) =>
