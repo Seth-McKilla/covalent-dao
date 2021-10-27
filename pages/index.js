@@ -81,6 +81,7 @@ export default function Home({ daos }) {
 export async function getStaticProps() {
   const daoNames = ["Uniswap", "Aave Token", "SushiToken", "Compound"];
   const daoTickers = ["UNI", "AAVE", "SUSHI", "COMP"];
+  let daos = [];
 
   const res = await fetch(
     `https://api.covalenthq.com/v1/pricing/tickers/?tickers=${daoTickers.toString()}&key=${
@@ -89,14 +90,10 @@ export async function getStaticProps() {
   );
   const { data } = await res.json();
 
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
+  if (!data) return;
 
   // Remove duplicate tickers
-  const daos = data.items.filter(({ contract_name }) =>
+  daos = data.items.filter(({ contract_name }) =>
     daoNames.includes(contract_name)
   );
 

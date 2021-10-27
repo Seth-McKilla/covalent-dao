@@ -13,6 +13,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import { green } from "@mui/material/colors";
 
 export default function DaoCard({ name, ticker, price, address, imgUrl }) {
+  name = name.replace("Token", "");
   const { dispatch } = useContext(Context);
   const handleClick = () => {
     dispatch({
@@ -37,7 +38,7 @@ export default function DaoCard({ name, ticker, price, address, imgUrl }) {
           <CardMedia component="img" height="175" image={imgUrl} alt={name} />
           <CardContent>
             <Typography gutterBottom variant="h4" sx={{ width: "100%" }}>
-              {`${name.replace("Token", "")}`}
+              {`${name}`}
             </Typography>
             <Typography variant="h6" color="text.secondary">
               {ticker}
