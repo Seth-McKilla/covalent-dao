@@ -23,7 +23,7 @@ export default function DaoCard({ name, ticker, price, address, imgUrl }) {
   };
 
   return (
-    <Link href={`/${_.kebabCase(name)}`} passHref>
+    <Link href={`/${_.toLower(ticker)}`} passHref>
       <Card
         sx={{ maxWidth: 250 }}
         component={motion.div}

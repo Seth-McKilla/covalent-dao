@@ -11,10 +11,10 @@ import { useTheme, darken } from "@mui/material";
 export default function Link({ title, icon }) {
   const {
     pathname,
-    query: { daoName },
+    query: { daoTicker },
   } = useRouter();
   let currentRoute = pathname.split("/").pop();
-  if (currentRoute === "[daoName]") currentRoute = "dashboard";
+  if (currentRoute === "[daoTicker]") currentRoute = "dashboard";
 
   const isCurrentRoute = title === currentRoute;
   const theme = useTheme();
@@ -32,7 +32,7 @@ export default function Link({ title, icon }) {
 
   return (
     <NextLink
-      href={`/${daoName}/${
+      href={`/${daoTicker}/${
         currentRoute !== "dashboard" ? _.kebabCase(title) : ""
       }`}
     >

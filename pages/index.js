@@ -84,9 +84,9 @@ export default function Home({ daos }) {
 export async function getStaticProps() {
   const daoNames = [];
   const daoTickers = [];
-  daoList.map(({ contract_name, contract_ticker_symbol }) => {
-    daoNames.push(contract_name);
-    daoTickers.push(contract_ticker_symbol);
+  daoList.map(({ contractName, contractTicker }) => {
+    daoNames.push(contractName);
+    daoTickers.push(contractTicker);
   });
 
   let daos = [];
