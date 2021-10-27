@@ -67,7 +67,7 @@ export default function DaoDashboard({ tokenHolders }) {
   );
 }
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   const { daoTicker } = ctx.params;
   const dao = _.find(daoList, { contractTicker: _.toUpper(daoTicker) });
   let tokenHolders = [];
@@ -81,15 +81,4 @@ export async function getStaticProps(ctx) {
   tokenHolders = [...data.items];
 
   return { props: { tokenHolders } };
-}
-
-export async function getStaticPaths() {
-  const paths = daoList.map(
-    ({ contractTicker }) => `/${_.toLower(contractTicker)}`
-  );
-
-  return {
-    paths,
-    fallback: true,
-  };
 }

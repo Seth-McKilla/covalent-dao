@@ -81,7 +81,7 @@ export default function Home({ daos }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const daoNames = [];
   const daoTickers = [];
   daoList.map(({ contractName, contractTicker }) => {
