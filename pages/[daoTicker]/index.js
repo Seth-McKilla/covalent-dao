@@ -1,10 +1,11 @@
-import { useContext } from "react";
-import { Context } from "../../context";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import fetcher from "../../utils/fetcher";
+import JSONPretty from "react-json-pretty";
 import daoList from "../../constants/daoList";
 import _ from "lodash";
-import JSONPretty from "react-json-pretty";
 
 // Mui
 import Grid from "@mui/material/Grid";
@@ -14,10 +15,25 @@ import Typography from "@mui/material/Typography";
 // Layout
 import { DashboardLayout } from "../../layouts";
 
-export default function DaoDashboard({ tokenHolders }) {
+export default function DaoDashboard() {
   const {
-    state: { info },
-  } = useContext(Context);
+    query: { daoTicker },
+    isReady,
+  } = useRouter();
+
+  const dao = _.find(daoList, { contractTicker: _.toUpper(daoTicker) });
+
+  const { data, error } = useSWR(
+    isReady && `/api/token-holders/${daoTicker}`,
+    fetcher,
+    { refreshInterval: 30 * 1000 }
+  );
+
+  const renderData = () => {
+    if (error) return "Failed to load.";
+    if (!data) return "Loading...";
+    return data;
+  };
 
   return (
     <div>
@@ -33,16 +49,16 @@ export default function DaoDashboard({ tokenHolders }) {
 
       <DashboardLayout>
         <Grid item xs={12}>
-          {info && (
+          {dao && (
             <div style={{ display: "flex" }}>
               <Image
-                src={info.imgUrl}
+                src={dao.logoUrl}
                 height={50}
                 width={50}
-                alt={`${info.name}-logo`}
+                alt={`${dao.contractName}-logo`}
               />
               <Typography variant="h4" align="left" ml={1}>
-                {info.name}
+                {dao.contractName}
               </Typography>
             </div>
           )}
@@ -51,7 +67,7 @@ export default function DaoDashboard({ tokenHolders }) {
         <Grid item xs={12} component={Paper}>
           <JSONPretty
             id="json-pretty"
-            data={tokenHolders}
+            data={renderData()}
             theme={{
               main: "line-height:1.3;color:#66d9ef;",
               error: "line-height:1.3;color:#66d9ef;",
@@ -65,20 +81,4 @@ export default function DaoDashboard({ tokenHolders }) {
       </DashboardLayout>
     </div>
   );
-}
-
-export async function getServerSideProps(ctx) {
-  const { daoTicker } = ctx.params;
-  const dao = _.find(daoList, { contractTicker: _.toUpper(daoTicker) });
-  let tokenHolders = [];
-
-  const res = await fetch(
-    `https://api.covalenthq.com/v1/${dao.chainId}/tokens/${dao.contractAddress}/token_holders/?key=${process.env.COVALENT_API_KEY}`
-  );
-  const { data } = await res.json();
-
-  if (!data) return { props: {} };
-  tokenHolders = [...data.items];
-
-  return { props: { tokenHolders } };
 }
