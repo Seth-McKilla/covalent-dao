@@ -35,6 +35,7 @@ export default function DaoDashboard() {
 
   const theme = useTheme();
   const primaryColor = theme.palette.primary.main;
+  const secondaryColor = theme.palette.secondary.main;
 
   const dao = _.find(daoList, { contractTicker: _.toUpper(daoTicker) });
 
@@ -95,7 +96,6 @@ export default function DaoDashboard() {
               />
             </Grid>
 
-            {/* Second Row */}
             <Grid item xs={6}>
               <LineGraph
                 title="Overall Activity"
@@ -110,6 +110,15 @@ export default function DaoDashboard() {
                 data={dummyData.aumOverTime}
                 color={green[500]}
                 keyBar="AUM"
+              />
+            </Grid>
+
+            <Grid item xs={6}>
+              <LineGraph
+                title="Voting Power Concentration"
+                data={dummyData.gini}
+                color={secondaryColor}
+                keyY="Gini-Idx"
               />
             </Grid>
           </Grid>

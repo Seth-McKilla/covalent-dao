@@ -7,9 +7,9 @@ const randomData = (max, fixed) => {
 
 const dummyData = {
   sentiment: [
-    { name: "Positive 😊", value: 454, color: green[500] },
-    { name: "Negative 😢", value: 261, color: red[500] },
-    { name: "Neutral 😐", value: 97, color: grey[600] },
+    { name: "Positive 😊", value: 1000 * Math.random(), color: green[500] },
+    { name: "Negative 😢", value: 1000 * Math.random(), color: red[500] },
+    { name: "Neutral 😐", value: 1000 * Math.random(), color: grey[600] },
   ],
 
   aum: randomData(10000000000, 0),
@@ -21,14 +21,21 @@ const dummyData = {
   activity: abbrMonths.map((month) => {
     return {
       month,
-      Txs: Number(randomData(10000000, 0)),
+      Txs: randomData(10000000, 0),
     };
   }),
 
   aumOverTime: abbrMonths.map((month) => {
     return {
       month,
-      AUM: Number(randomData(10000000000, 0)),
+      AUM: randomData(10000000000, 0),
+    };
+  }),
+
+  gini: abbrMonths.map((month) => {
+    return {
+      month,
+      "Gini-Idx": randomData(1, 2),
     };
   }),
 };
