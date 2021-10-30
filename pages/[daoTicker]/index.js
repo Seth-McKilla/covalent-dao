@@ -21,7 +21,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import { DashboardLayout } from "../../layouts";
 
 // Components
-import { PieChart, StatCard, LineGraph } from "../../components";
+import { PieChart, StatCard, LineGraph, BarGraph } from "../../components";
 
 // Utils
 import { numbersWithCommas } from "../../utils/numbers";
@@ -76,7 +76,7 @@ export default function DaoDashboard() {
               <StatCard
                 title="Assets Under Management (AUM)"
                 value={`$${numbersWithCommas(dummyData.aum)}`}
-                valueColor={green[600]}
+                valueColor={green[500]}
                 Icon={AccountBalanceIcon}
               />
             </Grid>
@@ -101,7 +101,15 @@ export default function DaoDashboard() {
                 title="Overall Activity"
                 data={dummyData.activity}
                 color={primaryColor}
-                keyY="txs"
+                keyY="Txs"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <BarGraph
+                title="AUM Over Time"
+                data={dummyData.aumOverTime}
+                color={green[500]}
+                keyBar="AUM"
               />
             </Grid>
           </Grid>

@@ -43,7 +43,7 @@ export default function DaoCard({ name, ticker, price, address, imgUrl }) {
             <Typography variant="h6" color="text.secondary">
               {ticker}
             </Typography>
-            <Typography variant="h4" sx={{ color: green[400] }}>
+            <Typography variant="h4" sx={{ color: green[500] }}>
               {`$${price}`}
             </Typography>
           </CardContent>
