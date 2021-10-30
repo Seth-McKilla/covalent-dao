@@ -1,4 +1,9 @@
 import { green, red, grey } from "@mui/material/colors";
+import abbrMonths from "../templates/months";
+
+const randomData = (max, fixed) => {
+  return (Math.random() * max).toFixed(fixed);
+};
 
 const dummyData = {
   sentiment: [
@@ -7,11 +12,18 @@ const dummyData = {
     { name: "Neutral 😐", value: 97, color: grey[600] },
   ],
 
-  aum: 2000000000,
+  aum: randomData(10000000000, 0),
 
-  voter: 0.012,
+  voter: randomData(1, 2) / 50,
 
-  members: 125000,
+  members: randomData(500000, 0),
+
+  activity: abbrMonths.map((month) => {
+    return {
+      month,
+      txs: Number(randomData(10000000, 0)),
+    };
+  }),
 };
 
 export default dummyData;

@@ -7,9 +7,9 @@ import daoList from "../../constants/daoList";
 import _ from "lodash";
 
 // Mui
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material";
 import { green } from "@mui/material/colors";
 // @ Icons
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
@@ -21,10 +21,10 @@ import GroupIcon from "@mui/icons-material/Group";
 import { DashboardLayout } from "../../layouts";
 
 // Components
-import { PieChart, StatCard } from "../../components";
+import { PieChart, StatCard, LineGraph } from "../../components";
 
 // Utils
-import numbersWithCommas from "../../utils/numbersWithCommas";
+import { numbersWithCommas } from "../../utils/numbers";
 import dummyData from "../../temp/dummyData";
 
 export default function DaoDashboard() {
@@ -32,6 +32,9 @@ export default function DaoDashboard() {
     query: { daoTicker },
     isReady,
   } = useRouter();
+
+  const theme = useTheme();
+  const primaryColor = theme.palette.primary.main;
 
   const dao = _.find(daoList, { contractTicker: _.toUpper(daoTicker) });
 
@@ -89,6 +92,16 @@ export default function DaoDashboard() {
                 title="Total Number of Members"
                 value={numbersWithCommas(dummyData.members)}
                 Icon={GroupIcon}
+              />
+            </Grid>
+
+            {/* Second Row */}
+            <Grid item xs={6}>
+              <LineGraph
+                title="Overall Activity"
+                data={dummyData.activity}
+                color={primaryColor}
+                keyY="txs"
               />
             </Grid>
           </Grid>
