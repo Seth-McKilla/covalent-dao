@@ -28,6 +28,9 @@ export default function StatCard({ title, value, valueColor, Icon }) {
     header: {
       marginTop: 8,
     },
+    value: {
+      fontWeight: "bold",
+    },
   };
 
   return (
@@ -40,6 +43,7 @@ export default function StatCard({ title, value, valueColor, Icon }) {
           component="h2"
           align="center"
           color={valueColor}
+          sx={styles.value}
         >
           {value}
         </Typography>

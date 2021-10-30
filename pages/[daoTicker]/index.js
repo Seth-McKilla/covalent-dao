@@ -10,7 +10,7 @@ import _ from "lodash";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { green, red, grey } from "@mui/material/colors";
+import { green } from "@mui/material/colors";
 // @ Icons
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
@@ -25,20 +25,7 @@ import { PieChart, StatCard } from "../../components";
 
 // Utils
 import numbersWithCommas from "../../utils/numbersWithCommas";
-
-// DUMMY DATA
-// @ Sentiment analysis
-const sentimentAnalysisData = [
-  { name: "Positive 😊", value: 454, color: green[600] },
-  { name: "Negative 😢", value: 261, color: red[600] },
-  { name: "Neutral 😐", value: 97, color: grey[600] },
-];
-// @ AUM
-const aumData = 2000000000;
-// @ Voter Participation
-const voterData = 0.012;
-// @ Members
-const membersData = 125000;
+import dummyData from "../../temp/dummyData";
 
 export default function DaoDashboard() {
   const {
@@ -78,17 +65,14 @@ export default function DaoDashboard() {
         </Grid>
 
         <Grid item xs={12}>
-          <Grid component={Container} container spacing={2}>
+          <Grid container spacing={3} maxWidth="lg">
             <Grid item xs={3}>
-              <PieChart
-                data={sentimentAnalysisData}
-                title="Sentiment Analysis"
-              />
+              <PieChart data={dummyData.sentiment} title="Sentiment Analysis" />
             </Grid>
             <Grid item xs={3}>
               <StatCard
                 title="Assets Under Management (AUM)"
-                value={`$${numbersWithCommas(aumData)}`}
+                value={`$${numbersWithCommas(dummyData.aum)}`}
                 valueColor={green[600]}
                 Icon={AccountBalanceIcon}
               />
@@ -96,14 +80,14 @@ export default function DaoDashboard() {
             <Grid item xs={3}>
               <StatCard
                 title="Voter Participation Percentage"
-                value={`${Number(voterData * 100).toFixed(2)}%`}
+                value={`${Number(dummyData.voter * 100).toFixed(2)}%`}
                 Icon={HowToVoteIcon}
               />
             </Grid>
             <Grid item xs={3}>
               <StatCard
                 title="Total Number of Members"
-                value={numbersWithCommas(membersData)}
+                value={numbersWithCommas(dummyData.members)}
                 Icon={GroupIcon}
               />
             </Grid>
