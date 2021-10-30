@@ -7,23 +7,38 @@ import daoList from "../../constants/daoList";
 import _ from "lodash";
 
 // Mui
+import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { green, red, grey } from "@mui/material/colors";
+// @ Icons
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import GroupIcon from "@mui/icons-material/Group";
+// @ Theme
 
 // Layout
 import { DashboardLayout } from "../../layouts";
 
 // Components
-import { PieChart } from "../../components";
+import { PieChart, StatCard } from "../../components";
+
+// Utils
+import numbersWithCommas from "../../utils/numbersWithCommas";
 
 // DUMMY DATA
-// @ Pie Chart
-const data = [
+// @ Sentiment analysis
+const sentimentAnalysisData = [
   { name: "Positive 😊", value: 454, color: green[600] },
   { name: "Negative 😢", value: 261, color: red[600] },
   { name: "Neutral 😐", value: 97, color: grey[600] },
 ];
+// @ AUM
+const aumData = 2000000000;
+// @ Voter Participation
+const voterData = 0.012;
+// @ Members
+const membersData = 125000;
 
 export default function DaoDashboard() {
   const {
@@ -46,7 +61,7 @@ export default function DaoDashboard() {
       </Head>
 
       <DashboardLayout>
-        <Grid item xs={12}>
+        <Grid item xs={12} mb={2}>
           {dao && (
             <div style={{ display: "flex" }}>
               <Image
@@ -63,9 +78,34 @@ export default function DaoDashboard() {
         </Grid>
 
         <Grid item xs={12}>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <PieChart data={data} title="Sentiment Analysis" />
+          <Grid component={Container} container spacing={2}>
+            <Grid item xs={3}>
+              <PieChart
+                data={sentimentAnalysisData}
+                title="Sentiment Analysis"
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <StatCard
+                title="Assets Under Management (AUM)"
+                value={`$${numbersWithCommas(aumData)}`}
+                valueColor={green[600]}
+                Icon={AccountBalanceIcon}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <StatCard
+                title="Voter Participation Percentage"
+                value={`${Number(voterData * 100).toFixed(2)}%`}
+                Icon={HowToVoteIcon}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <StatCard
+                title="Total Number of Members"
+                value={numbersWithCommas(membersData)}
+                Icon={GroupIcon}
+              />
             </Grid>
           </Grid>
         </Grid>
