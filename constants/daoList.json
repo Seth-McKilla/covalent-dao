@@ -26,5 +26,12 @@
     "contractTicker": "COMP",
     "contractAddress": "0xc00e94cb662c3520282e6f5717214004a7f26888",
     "logoUrl": "https://logos.covalenthq.com/tokens/0xc00e94cb662c3520282e6f5717214004a7f26888.png"
+  },
+  {
+    "chainId": "1",
+    "contractName": "Badger",
+    "contractTicker": "BADGER",
+    "contractAddress": "0x3472a5a71965499acd81997a54bba8d852c6e53d",
+    "logoUrl": "https://logos.covalenthq.com/tokens/0x3472a5a71965499acd81997a54bba8d852c6e53d.png"
   }
 ]
