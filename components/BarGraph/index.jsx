@@ -22,7 +22,7 @@ export default function BarGraph({ title, data, color, keyBar }) {
       <Typography variant="h5" gutterBottom m={1} align="center">
         {title}
       </Typography>
-      <ResponsiveContainer width="100%" aspect={2}>
+      <ResponsiveContainer width="100%" aspect={1.5}>
         <BarChart
           width={500}
           height={300}

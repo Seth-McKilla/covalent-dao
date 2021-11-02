@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-// import useSWR from "swr";
-// import fetcher from "../../utils/fetcher";
+import useSWR from "swr";
+import fetcher from "../../utils/fetcher";
 import daoList from "../../constants/daoList";
 import _ from "lodash";
 
@@ -32,6 +32,10 @@ export default function DaoDashboard() {
     query: { daoTicker },
     isReady,
   } = useRouter();
+
+  const { data, error } = useSWR("/api/v1/test", fetcher);
+
+  isReady && !error && console.log(data);
 
   const theme = useTheme();
   const primaryColor = theme.palette.primary.main;
@@ -96,7 +100,7 @@ export default function DaoDashboard() {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <LineGraph
                 title="Overall Activity"
                 data={dummyData.activity}
@@ -104,7 +108,7 @@ export default function DaoDashboard() {
                 keyY="Txs"
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <BarGraph
                 title="AUM Over Time"
                 data={dummyData.aumOverTime}
@@ -113,7 +117,7 @@ export default function DaoDashboard() {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <LineGraph
                 title="Voting Power Concentration"
                 data={dummyData.gini}

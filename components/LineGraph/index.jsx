@@ -21,7 +21,7 @@ export default function LineGraph({ title, data, color, keyY }) {
       <Typography variant="h5" gutterBottom m={1} align="center">
         {title}
       </Typography>
-      <ResponsiveContainer width="100%" aspect={2}>
+      <ResponsiveContainer width="100%" aspect={1.5}>
         <AreaChart
           width={500}
           height={400}
