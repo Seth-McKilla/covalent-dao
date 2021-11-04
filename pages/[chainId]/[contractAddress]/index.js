@@ -22,7 +22,13 @@ import GroupIcon from "@mui/icons-material/Group";
 import { DashboardLayout } from "../../../layouts";
 
 // Components
-import { PieChart, StatCard, LineGraph, BarGraph } from "../../../components";
+import {
+  PieChart,
+  StatCard,
+  LineGraph,
+  BarGraph,
+  Loader,
+} from "../../../components";
 
 // Utils
 import { numbersWithCommas } from "../../../utils/numbers";
@@ -36,19 +42,9 @@ export default function DaoDashboard() {
 
   const { data, error } = useSWR(
     isReady &&
-      `/api/v1/get-aum?chainId=${chainId}&contractId=${contractAddress}`,
+      `/api/v1/get-token-holders?chainId=${chainId}&contractId=${contractAddress}`,
     fetcher
   );
-
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-    } else if (data) {
-      console.log(data);
-    } else {
-      console.log("Loading...");
-    }
-  }, [data, error]);
 
   const theme = useTheme();
   const primaryColor = theme.palette.primary.main;
@@ -86,59 +82,66 @@ export default function DaoDashboard() {
         </Grid>
 
         <Grid item xs={12}>
-          <Grid container spacing={3} maxWidth="lg">
-            <Grid item xs={3}>
-              <PieChart data={dummyData.sentiment} title="Sentiment Analysis" />
-            </Grid>
-            <Grid item xs={3}>
-              <StatCard
-                title="Assets Under Management (AUM)"
-                value={`$${numbersWithCommas(dummyData.aum)}`}
-                valueColor={green[500]}
-                Icon={AccountBalanceIcon}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <StatCard
-                title="Voter Participation Percentage"
-                value={`${Number(dummyData.voter * 100).toFixed(2)}%`}
-                Icon={HowToVoteIcon}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <StatCard
-                title="Total Number of Members"
-                value={numbersWithCommas(dummyData.members)}
-                Icon={GroupIcon}
-              />
-            </Grid>
+          {!data ? (
+            <Loader />
+          ) : (
+            <Grid container spacing={3} maxWidth="lg">
+              <Grid item xs={3}>
+                <PieChart
+                  data={dummyData.sentiment}
+                  title="Sentiment Analysis"
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <StatCard
+                  title="Assets Under Management (AUM)"
+                  value={`$${numbersWithCommas(dummyData.aum)}`}
+                  valueColor={green[500]}
+                  Icon={AccountBalanceIcon}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <StatCard
+                  title="Voter Participation Percentage"
+                  value={`${Number(dummyData.voter * 100).toFixed(2)}%`}
+                  Icon={HowToVoteIcon}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <StatCard
+                  title="Total Number of Members"
+                  value={numbersWithCommas(data.total_count)}
+                  Icon={GroupIcon}
+                />
+              </Grid>
 
-            <Grid item xs={6}>
-              <LineGraph
-                title="Overall Activity"
-                data={dummyData.activity}
-                color={primaryColor}
-                keyY="Txs"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <BarGraph
-                title="AUM Over Time"
-                data={dummyData.aumOverTime}
-                color={green[500]}
-                keyBar="AUM"
-              />
-            </Grid>
+              <Grid item xs={6}>
+                <LineGraph
+                  title="Overall Activity"
+                  data={dummyData.activity}
+                  color={primaryColor}
+                  keyY="Txs"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <BarGraph
+                  title="AUM Over Time"
+                  data={dummyData.aumOverTime}
+                  color={green[500]}
+                  keyBar="AUM"
+                />
+              </Grid>
 
-            <Grid item xs={6}>
-              <LineGraph
-                title="Voting Power Concentration"
-                data={dummyData.gini}
-                color={secondaryColor}
-                keyY="Gini-Idx"
-              />
+              <Grid item xs={6}>
+                <LineGraph
+                  title="Voting Power Concentration"
+                  data={dummyData.gini}
+                  color={secondaryColor}
+                  keyY="Gini-Idx"
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </Grid>
       </DashboardLayout>
     </div>

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { default as NextLink } from "next/link";
+import Link from "next/link";
 import _ from "lodash";
 
 // Mui
@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Icon from "@mui/material/Icon";
 import { useTheme, darken } from "@mui/material";
 
-export default function Link({ title, icon }) {
+export default function NavLink({ title, icon }) {
   const {
     pathname,
     query: { daoTicker },
@@ -31,7 +31,7 @@ export default function Link({ title, icon }) {
   };
 
   return (
-    <NextLink
+    <Link
       href={`/${daoTicker}/${
         currentRoute !== "dashboard" ? _.kebabCase(title) : ""
       }`}
@@ -42,6 +42,6 @@ export default function Link({ title, icon }) {
           <ListItemText primary={_.startCase(title)} />
         </ListItem>
       </a>
-    </NextLink>
+    </Link>
   );
 }

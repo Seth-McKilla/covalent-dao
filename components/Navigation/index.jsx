@@ -1,3 +1,4 @@
+import Link from "next/link";
 // Mui
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -8,7 +9,7 @@ import Drawer from "@mui/material/Drawer";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
 // Components
-import Link from "./Link";
+import NavLink from "./NavLink";
 
 export default function Navigation({ open, handleDrawerToggle }) {
   const styles = {
@@ -28,20 +29,24 @@ export default function Navigation({ open, handleDrawerToggle }) {
 
   const Links = () => {
     const listItems = routes.map((props, index) => (
-      <Link key={`${props.title}-${index}`} {...props} />
+      <NavLink key={`${props.title}-${index}`} {...props} />
     ));
 
     return (
       <Box sx={styles.drawer}>
-        <Typography
-          variant="h4"
-          color="common.white"
-          p={2}
-          align="center"
-          gutterBottom
-        >
-          LOGO
-        </Typography>
+        <Link href="/" passHref>
+          <a>
+            <Typography
+              variant="h4"
+              color="common.white"
+              p={2}
+              align="center"
+              gutterBottom
+            >
+              DAOlytics
+            </Typography>
+          </a>
+        </Link>
         <List>{listItems}</List>
       </Box>
     );

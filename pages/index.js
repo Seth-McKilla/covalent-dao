@@ -1,8 +1,10 @@
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
 import daoList from "../constants/daoList";
 
 // Mui
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
@@ -55,11 +57,29 @@ export default function Home({ daos }) {
       <LandingLayout>
         <Grid item xs={12} align="center" sx={{ color: "#fff", zIndex: 10 }}>
           <Typography variant="h2" gutterBottom>
-            Welcome to DAO-lytics (?)
+            Welcome to DAOlytics
           </Typography>
-          <Typography variant="h4" gutterBottom>
-            {"<Insert brief project description here>"}
-          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "row",
+            }}
+          >
+            <Typography variant="h4" mr={2}>
+              The DAO Analytics Dashboard powered by
+            </Typography>
+            <Link href="https://www.covalenthq.com/" passHref>
+              <a>
+                <Image
+                  src="https://www.covalenthq.com/static/images/covalent-logo-tri.svg"
+                  height={50}
+                  width={200}
+                  alt="Covalent-logo"
+                />
+              </a>
+            </Link>
+          </Box>
           <Grid container spacing={2} mt={5}>
             {daos.length === 0
               ? "Error fetching DAOs"

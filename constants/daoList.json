@@ -1,13 +1,6 @@
 [
   {
     "chainId": "1",
-    "contractName": "Uniswap",
-    "contractTicker": "UNI",
-    "contractAddress": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
-    "logoUrl": "https://logos.covalenthq.com/tokens/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984.png"
-  },
-  {
-    "chainId": "1",
     "contractName": "Aave Token",
     "contractTicker": "AAVE",
     "contractAddress": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
