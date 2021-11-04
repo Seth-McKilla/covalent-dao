@@ -12,7 +12,6 @@ class handler(BaseHTTPRequestHandler):
     self.end_headers()
     query = urlparse(self.path).query
     ticker = parse_qs(query)["ticker"][0]
-    print(ticker)
 
     response = requests.get(f"https://api.covalenthq.com/v1/pricing/tickers/?tickers={ticker}&key=ckey_ec93e26420d24cab8b09ef796f4%27")
     spot_prices = response.json()["data"]["items"]
