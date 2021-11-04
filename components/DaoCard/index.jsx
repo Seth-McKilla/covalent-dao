@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Context } from "../../context";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import daoList from "../../constants/daoList";
 import _ from "lodash";
 
 // Mui
@@ -13,6 +14,10 @@ import CardActionArea from "@mui/material/CardActionArea";
 import { green } from "@mui/material/colors";
 
 export default function DaoCard({ name, ticker, price, address, imgUrl }) {
+  const dao = _.find(daoList, {
+    contractTicker: _.toUpper(ticker),
+  });
+
   name = name.replace("Token", "");
   const { dispatch } = useContext(Context);
   const handleClick = () => {
@@ -23,7 +28,11 @@ export default function DaoCard({ name, ticker, price, address, imgUrl }) {
   };
 
   return (
-    <Link href={`/${_.toLower(ticker)}`} passHref prefetch={false}>
+    <Link
+      href={`/${dao.chainId}/${dao.contractAddress}`}
+      passHref
+      prefetch={false}
+    >
       <Card
         sx={{ maxWidth: 250 }}
         component={motion.div}

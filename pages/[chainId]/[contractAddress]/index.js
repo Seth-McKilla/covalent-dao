@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import fetcher from "../../utils/fetcher";
-import daoList from "../../constants/daoList";
+import fetcher from "../../../utils/fetcher";
+import daoList from "../../../constants/daoList";
 import _ from "lodash";
 
 // Mui
@@ -18,30 +19,42 @@ import GroupIcon from "@mui/icons-material/Group";
 // @ Theme
 
 // Layout
-import { DashboardLayout } from "../../layouts";
+import { DashboardLayout } from "../../../layouts";
 
 // Components
-import { PieChart, StatCard, LineGraph, BarGraph } from "../../components";
+import { PieChart, StatCard, LineGraph, BarGraph } from "../../../components";
 
 // Utils
-import { numbersWithCommas } from "../../utils/numbers";
-import dummyData from "../../temp/dummyData";
+import { numbersWithCommas } from "../../../utils/numbers";
+import dummyData from "../../../temp/dummyData";
 
 export default function DaoDashboard() {
   const {
-    query: { daoTicker },
+    query: { chainId, contractAddress },
     isReady,
   } = useRouter();
 
-  const { data, error } = useSWR("/api/v1/test", fetcher);
+  const { data, error } = useSWR(
+    isReady &&
+      `/api/v1/get-aum?chainId=${chainId}&contractId=${contractAddress}`,
+    fetcher
+  );
 
-  isReady && !error && console.log(data);
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+    } else if (data) {
+      console.log(data);
+    } else {
+      console.log("Loading...");
+    }
+  }, [data, error]);
 
   const theme = useTheme();
   const primaryColor = theme.palette.primary.main;
   const secondaryColor = theme.palette.secondary.main;
 
-  const dao = _.find(daoList, { contractTicker: _.toUpper(daoTicker) });
+  const dao = _.find(daoList, { contractAddress });
 
   return (
     <div>
@@ -100,7 +113,7 @@ export default function DaoDashboard() {
               />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <LineGraph
                 title="Overall Activity"
                 data={dummyData.activity}
@@ -108,7 +121,7 @@ export default function DaoDashboard() {
                 keyY="Txs"
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <BarGraph
                 title="AUM Over Time"
                 data={dummyData.aumOverTime}
@@ -117,7 +130,7 @@ export default function DaoDashboard() {
               />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <LineGraph
                 title="Voting Power Concentration"
                 data={dummyData.gini}
