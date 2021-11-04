@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -14,7 +14,7 @@ import { useTheme } from "@mui/material";
 import { green } from "@mui/material/colors";
 // @ Icons
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import GroupIcon from "@mui/icons-material/Group";
 // @ Theme
 
@@ -28,6 +28,7 @@ import {
   LineGraph,
   BarGraph,
   Loader,
+  BasicTable,
 } from "../../../components";
 
 // Utils
@@ -35,22 +36,38 @@ import { numbersWithCommas } from "../../../utils/numbers";
 import dummyData from "../../../temp/dummyData";
 
 export default function DaoDashboard() {
+  const theme = useTheme();
+  const primaryColor = theme.palette.primary.main;
+  const secondaryColor = theme.palette.secondary.main;
+
   const {
     query: { chainId, contractAddress },
     isReady,
   } = useRouter();
 
-  const { data, error } = useSWR(
+  const dao = _.find(daoList, { contractAddress });
+
+  // API Calls
+  const { data: tokenHolders } = useSWR(
     isReady &&
       `/api/v1/get-token-holders?chainId=${chainId}&contractId=${contractAddress}`,
     fetcher
   );
 
-  const theme = useTheme();
-  const primaryColor = theme.palette.primary.main;
-  const secondaryColor = theme.palette.secondary.main;
+  const { data: spotPrices } = useSWR(
+    isReady && `/api/v1/get-spot-prices?ticker=${dao.contractTicker}`,
+    fetcher
+  );
+  const [quoteRate, setQuoteRate] = useState(null);
+  useEffect(() => {
+    if (!spotPrices) return;
+    const spotPrice = _.find(spotPrices.spot_prices, {
+      "contract_address": contractAddress,
+    });
+    spotPrice && setQuoteRate(spotPrice.quote_rate);
+  }, [spotPrices]);
 
-  const dao = _.find(daoList, { contractAddress });
+  const dataLoaded = !!tokenHolders && !!spotPrices;
 
   return (
     <div>
@@ -82,7 +99,7 @@ export default function DaoDashboard() {
         </Grid>
 
         <Grid item xs={12}>
-          {!data ? (
+          {!dataLoaded ? (
             <Loader />
           ) : (
             <Grid container spacing={3} maxWidth="lg">
@@ -90,6 +107,14 @@ export default function DaoDashboard() {
                 <PieChart
                   data={dummyData.sentiment}
                   title="Sentiment Analysis"
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <StatCard
+                  title={`Current Quote Rate of Asset (${dao.contractTicker})`}
+                  value={`$${quoteRate}`}
+                  valueColor={green[500]}
+                  Icon={AttachMoneyIcon}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -102,15 +127,8 @@ export default function DaoDashboard() {
               </Grid>
               <Grid item xs={3}>
                 <StatCard
-                  title="Voter Participation Percentage"
-                  value={`${Number(dummyData.voter * 100).toFixed(2)}%`}
-                  Icon={HowToVoteIcon}
-                />
-              </Grid>
-              <Grid item xs={3}>
-                <StatCard
                   title="Total Number of Members"
-                  value={numbersWithCommas(data.total_count)}
+                  value={numbersWithCommas(tokenHolders.total_count)}
                   Icon={GroupIcon}
                 />
               </Grid>
@@ -138,6 +156,13 @@ export default function DaoDashboard() {
                   data={dummyData.gini}
                   color={secondaryColor}
                   keyY="Gini-Idx"
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <BasicTable
+                  title="Top Token Holders"
+                  rows={tokenHolders.token_holders}
                 />
               </Grid>
             </Grid>

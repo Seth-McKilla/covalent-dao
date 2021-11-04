@@ -1,30 +1,30 @@
 [
   {
     "chainId": "1",
-    "contractName": "Aave Token",
-    "contractTicker": "AAVE",
-    "contractAddress": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
-    "logoUrl": "https://logos.covalenthq.com/tokens/0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9.png"
+    "contractName": "Gitcoin",
+    "contractTicker": "GTC",
+    "contractAddress": "0xde30da39c46104798bb5aa3fe8b9e0e1f348163f",
+    "logoUrl": "https://logos.covalenthq.com/tokens/0xde30da39c46104798bb5aa3fe8b9e0e1f348163f.png"
   },
   {
     "chainId": "1",
-    "contractName": "SushiToken",
-    "contractTicker": "SUSHI",
-    "contractAddress": "0x6b3595068778dd592e39a122f4f5a5cf09c90fe2",
-    "logoUrl": "https://logos.covalenthq.com/tokens/0x6b3595068778dd592e39a122f4f5a5cf09c90fe2.png"
+    "contractName": "Radicle",
+    "contractTicker": "RAD",
+    "contractAddress": "0x31c8eacbffdd875c74b94b077895bd78cf1e64a3",
+    "logoUrl": "https://logos.covalenthq.com/tokens/0x31c8eacbffdd875c74b94b077895bd78cf1e64a3.png"
   },
   {
     "chainId": "1",
-    "contractName": "Compound",
-    "contractTicker": "COMP",
-    "contractAddress": "0xc00e94cb662c3520282e6f5717214004a7f26888",
-    "logoUrl": "https://logos.covalenthq.com/tokens/0xc00e94cb662c3520282e6f5717214004a7f26888.png"
+    "contractName": "pNetwork Token",
+    "contractTicker": "PNT",
+    "contractAddress": "0x89ab32156e46f46d02ade3fecbe5fc4243b9aaed",
+    "logoUrl": "https://logos.covalenthq.com/tokens/0x89ab32156e46f46d02ade3fecbe5fc4243b9aaed.png"
   },
   {
     "chainId": "1",
-    "contractName": "Badger",
-    "contractTicker": "BADGER",
-    "contractAddress": "0x3472a5a71965499acd81997a54bba8d852c6e53d",
-    "logoUrl": "https://logos.covalenthq.com/tokens/0x3472a5a71965499acd81997a54bba8d852c6e53d.png"
+    "contractName": "StakeWise",
+    "contractTicker": "SWISE",
+    "contractAddress": "0x48c3399719b582dd63eb5aadf12a40b4c3f52fa2",
+    "logoUrl": "https://logos.covalenthq.com/tokens/0x48c3399719b582dd63eb5aadf12a40b4c3f52fa2.png"
   }
 ]
