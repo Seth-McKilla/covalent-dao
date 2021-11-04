@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import Link from "next/link";
 import _ from "lodash";
 
 // Mui
@@ -9,12 +8,9 @@ import Icon from "@mui/material/Icon";
 import { useTheme, darken } from "@mui/material";
 
 export default function NavLink({ title, icon }) {
-  const {
-    pathname,
-    query: { daoTicker },
-  } = useRouter();
+  const { pathname } = useRouter();
   let currentRoute = pathname.split("/").pop();
-  if (currentRoute === "[daoTicker]") currentRoute = "dashboard";
+  if (currentRoute === "[contractAddress]") currentRoute = "dashboard";
 
   const isCurrentRoute = title === currentRoute;
   const theme = useTheme();
@@ -31,17 +27,9 @@ export default function NavLink({ title, icon }) {
   };
 
   return (
-    <Link
-      href={`/${daoTicker}/${
-        currentRoute !== "dashboard" ? _.kebabCase(title) : ""
-      }`}
-    >
-      <a>
-        <ListItem button alignItems="flex-start" sx={styles.item}>
-          <Icon sx={{ marginRight: 1 }}>{icon}</Icon>
-          <ListItemText primary={_.startCase(title)} />
-        </ListItem>
-      </a>
-    </Link>
+    <ListItem button alignItems="flex-start" sx={styles.item}>
+      <Icon sx={{ marginRight: 1 }}>{icon}</Icon>
+      <ListItemText primary={_.startCase(title)} />
+    </ListItem>
   );
 }
