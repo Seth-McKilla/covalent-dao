@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "../theme";
-import { Provider } from "../context";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -13,11 +12,9 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <Provider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }

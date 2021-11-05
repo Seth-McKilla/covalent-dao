@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { Context } from "../../context";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import daoList from "../../constants/daoList";
@@ -13,19 +11,10 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActionArea from "@mui/material/CardActionArea";
 import { green } from "@mui/material/colors";
 
-export default function DaoCard({ name, ticker, price, address, imgUrl }) {
+export default function DaoCard({ name, ticker, price, imgUrl }) {
   const dao = _.find(daoList, {
     contractTicker: _.toUpper(ticker),
   });
-
-  name = name.replace("Token", "");
-  const { dispatch } = useContext(Context);
-  const handleClick = () => {
-    dispatch({
-      type: "SET_DAO",
-      payload: { name, ticker, address, imgUrl },
-    });
-  };
 
   return (
     <Link
@@ -41,13 +30,12 @@ export default function DaoCard({ name, ticker, price, address, imgUrl }) {
           transition: { duration: 0.1 },
         }}
         whileTap={{ scale: 0.95 }}
-        onClick={handleClick}
       >
         <CardActionArea>
           <CardMedia component="img" height="175" image={imgUrl} alt={name} />
           <CardContent>
             <Typography gutterBottom variant="h4" sx={{ width: "100%" }}>
-              {`${name}`}
+              {`${name.replace("Token", "")}`}
             </Typography>
             <Typography variant="h6" color="text.secondary">
               {ticker}

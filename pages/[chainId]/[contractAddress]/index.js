@@ -141,25 +141,25 @@ export default function DaoDashboard() {
                   keyY="Txs"
                 />
               </Grid>
-              <Grid item xs={6}>
+              {/* <Grid item xs={6}>
                 <BarGraph
                   title="AUM Over Time"
                   data={dummyData.aumOverTime}
                   color={green[500]}
                   keyBar="AUM"
                 />
-              </Grid>
+              </Grid> */}
 
               <Grid item xs={6}>
                 <LineGraph
                   title="Voting Power Concentration"
-                  data={dummyData.gini}
+                  data={dummyData.giniIndex}
                   color={secondaryColor}
                   keyY="Gini-Idx"
                 />
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <BasicTable
                   title="Top Token Holders"
                   rows={tokenHolders.token_holders}
