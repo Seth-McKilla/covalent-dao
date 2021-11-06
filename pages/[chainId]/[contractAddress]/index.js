@@ -26,7 +26,6 @@ import {
   PieChart,
   StatCard,
   LineGraph,
-  BarGraph,
   Loader,
   BasicTable,
 } from "../../../components";
@@ -48,12 +47,14 @@ export default function DaoDashboard() {
   const dao = _.find(daoList, { contractAddress });
 
   // API Calls
+  // @ Token Holders
   const { data: tokenHolders } = useSWR(
     isReady &&
       `/api/v1/get-token-holders?chainId=${chainId}&contractId=${contractAddress}`,
     fetcher
   );
 
+  // @ Spot Prices
   const { data: spotPrices } = useSWR(
     isReady && `/api/v1/get-spot-prices?ticker=${dao.contractTicker}`,
     fetcher
@@ -67,7 +68,14 @@ export default function DaoDashboard() {
     spotPrice && setQuoteRate(spotPrice.quote_rate);
   }, [spotPrices]);
 
-  const dataLoaded = !!tokenHolders && !!spotPrices;
+  // @ Transactions
+  const { data: transactions } = useSWR(
+    isReady &&
+      `/api/v1/get-transactions?chainId=${chainId}&contractId=${contractAddress}`,
+    fetcher
+  );
+
+  const dataLoaded = !!tokenHolders && !!spotPrices && !!transactions;
 
   return (
     <div>
