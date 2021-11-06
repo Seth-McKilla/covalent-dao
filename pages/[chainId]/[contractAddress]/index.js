@@ -26,6 +26,7 @@ import {
   PieChart,
   StatCard,
   LineGraph,
+  BarGraph,
   Loader,
   BasicTable,
 } from "../../../components";
@@ -69,13 +70,13 @@ export default function DaoDashboard() {
   }, [spotPrices]);
 
   // @ Transactions
-  const { data: transactions } = useSWR(
+  const { data: transactionsByDate } = useSWR(
     isReady &&
       `/api/v1/get-transactions?chainId=${chainId}&contractId=${contractAddress}`,
     fetcher
   );
 
-  const dataLoaded = !!tokenHolders && !!spotPrices && !!transactions;
+  const dataLoaded = !!tokenHolders && !!spotPrices && !!transactionsByDate;
 
   return (
     <div>
@@ -144,25 +145,18 @@ export default function DaoDashboard() {
               <Grid item xs={6}>
                 <LineGraph
                   title="Overall Activity"
-                  data={dummyData.activity}
-                  color={primaryColor}
-                  keyY="Txs"
+                  data={transactionsByDate.transactions}
+                  color={green[500]}
+                  keyX="date"
+                  keyY="transactions"
                 />
               </Grid>
-              {/* <Grid item xs={6}>
-                <BarGraph
-                  title="AUM Over Time"
-                  data={dummyData.aumOverTime}
-                  color={green[500]}
-                  keyBar="AUM"
-                />
-              </Grid> */}
-
               <Grid item xs={6}>
                 <LineGraph
                   title="Voting Power Concentration"
                   data={dummyData.giniIndex}
                   color={secondaryColor}
+                  keyX="month"
                   keyY="Gini-Idx"
                 />
               </Grid>

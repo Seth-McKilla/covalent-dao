@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 // Utils
 import { numbersWithCommas, abbrNumber } from "../../utils/numbers";
 
-export default function LineGraph({ title, data, color, keyY }) {
+export default function LineGraph({ title, data, color, keyX, keyY }) {
   return (
     <Paper elevation={10}>
       <Typography variant="h5" gutterBottom m={1} align="center">
@@ -30,7 +30,7 @@ export default function LineGraph({ title, data, color, keyY }) {
             top: 10,
             right: 30,
             left: 0,
-            bottom: 0,
+            bottom: 30,
           }}
         >
           <defs>
@@ -40,7 +40,7 @@ export default function LineGraph({ title, data, color, keyY }) {
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
+          <XAxis dataKey={keyX} angle={-45} textAnchor="end" />
           <YAxis tickFormatter={(label) => abbrNumber(label)} />
           <Tooltip formatter={(number) => numbersWithCommas(number)} />
           <Area
