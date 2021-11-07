@@ -19,7 +19,7 @@ class handler(BaseHTTPRequestHandler):
 
     transactions = []
     for transaction in transactions_v2:
-      date = transaction["block_signed_at"].split("T")[0]
+      date = transaction["block_signed_at"].split("T")[0].replace("2021-", "").replace("-", "/")
 
       if not any(d["date"] == date for d in transactions):
         transactions.insert(0, {"date": date, "transactions": 1})
