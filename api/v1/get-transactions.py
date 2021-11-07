@@ -20,7 +20,7 @@ class handler(BaseHTTPRequestHandler):
 
     transactions = []
     for transaction in transactions_v2:
-      date_and_time = datetime.strptime(transaction["block_signed_at"], "%Y-%m-%dT%H:%M:%S%z").date()
+      date_and_time = datetime.strptime(transaction["block_signed_at"], "%Y-%m-%dT%H:%M:%S%Z").date()
       date = date_and_time.strftime("%m/%d")
 
       if not any(d["date"] == date for d in transactions):

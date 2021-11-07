@@ -67,7 +67,7 @@ export default function DaoDashboard() {
       "contract_address": contractAddress,
     });
     spotPrice && setQuoteRate(spotPrice.quote_rate);
-  }, [spotPrices]);
+  }, [spotPrices, contractAddress]);
 
   // @ Transactions
   const { data: transactionsByDate } = useSWR(
