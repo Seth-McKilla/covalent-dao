@@ -3,7 +3,6 @@ from urllib.parse import urlparse
 from urllib.parse import parse_qs
 import requests
 import json
-from datetime import datetime
 
 class handler(BaseHTTPRequestHandler):
 
@@ -20,8 +19,7 @@ class handler(BaseHTTPRequestHandler):
 
     transactions = []
     for transaction in transactions_v2:
-      date_and_time = datetime.strptime(transaction["block_signed_at"], "%Y-%m-%dT%H:%M:%S%Z").date()
-      date = date_and_time.strftime("%m/%d")
+      date = transaction["block_signed_at"].split("T")[0]
 
       if not any(d["date"] == date for d in transactions):
         transactions.insert(0, {"date": date, "transactions": 1})
