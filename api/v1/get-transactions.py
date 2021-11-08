@@ -1,8 +1,14 @@
+import os
+from dotenv import load_dotenv
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 import requests
 import json
+
+# Environment variables
+load_dotenv()
+COVALENT_API_KEY = os.getenv("COVALENT_API_KEY")
 
 class handler(BaseHTTPRequestHandler):
 
@@ -14,7 +20,7 @@ class handler(BaseHTTPRequestHandler):
     chainId = parse_qs(query)["chainId"][0]
     contractId = parse_qs(query)["contractId"][0]
 
-    response = requests.get(f"https://api.covalenthq.com/v1/{chainId}/address/{contractId}/transactions_v2/?page-size=250&key=ckey_ec93e26420d24cab8b09ef796f4%27")
+    response = requests.get(f"https://api.covalenthq.com/v1/{chainId}/address/{contractId}/transactions_v2/?page-size=250&key={COVALENT_API_KEY}")
     transactions_v2 = response.json()["data"]["items"]
 
     transactions = []

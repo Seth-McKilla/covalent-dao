@@ -1,8 +1,14 @@
+import os
+from dotenv import load_dotenv
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 import requests
 import json
+
+# Environment variables
+load_dotenv()
+COVALENT_API_KEY = os.getenv("COVALENT_API_KEY")
 
 class handler(BaseHTTPRequestHandler):
 
@@ -13,7 +19,7 @@ class handler(BaseHTTPRequestHandler):
     query = urlparse(self.path).query
     ticker = parse_qs(query)["ticker"][0]
 
-    response = requests.get(f"https://api.covalenthq.com/v1/pricing/tickers/?tickers={ticker}&key=ckey_ec93e26420d24cab8b09ef796f4%27")
+    response = requests.get(f"https://api.covalenthq.com/v1/pricing/tickers/?tickers={ticker}&key={COVALENT_API_KEY}")
     spot_prices = response.json()["data"]["items"]
     
     self.wfile.write(json.dumps({"spot_prices": spot_prices}).encode())
