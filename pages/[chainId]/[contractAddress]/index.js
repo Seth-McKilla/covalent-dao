@@ -32,7 +32,6 @@ import {
 
 // Utils
 import { numbersWithCommas } from "../../../utils/numbers";
-import dummyData from "../../../temp/dummyData";
 
 export default function DaoDashboard() {
   const theme = useTheme();
@@ -45,10 +44,10 @@ export default function DaoDashboard() {
   const dao = _.find(daoList, { contractAddress });
 
   // API Calls
-  // @ Token Holders
+  // @ Token Holders & Market Cap
   const { data: tokenHolders } = useSWR(
     isReady &&
-      `/api/v1/get-token-holders?chainId=${chainId}&contractId=${contractAddress}`,
+      `/api/v1/get-token-holders?chainId=${chainId}&contractId=${contractAddress}&ticker=${dao.contractTicker}`,
     fetcher
   );
 
@@ -168,8 +167,8 @@ export default function DaoDashboard() {
               </Grid>
               <Grid item xs={3}>
                 <StatCard
-                  title="Assets Under Management (AUM)"
-                  value={`$${numbersWithCommas(dummyData.aum)}`}
+                  title="Diluted Market Capitalization"
+                  value={`$${numbersWithCommas(tokenHolders.mkt_cap)}`}
                   valueColor={green[500]}
                   Icon={AccountBalanceIcon}
                 />
