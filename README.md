@@ -1,4 +1,4 @@
-This repo is a submission for the [DAO Analytics Dashboard Template](https://gitcoin.co/issue/covalenthq/covalent-gitcoin-bounties/5/100026820) hosted by [Covalent](https://www.covalenthq.com/) on GitCoin.
+This repo is a submission for the [DAO Analytics Dashboard Template](https://gitcoin.co/issue/covalenthq/covalent-gitcoin-bounties/5/100026820) hackathon hosted by [Covalent](https://www.covalenthq.com/) on GitCoin.
 
 #DAOlytics
 Daolytics is a basic open source, multi-chain compatible, DAO Analytics Dashboard Template, powered by the Covalent API.
@@ -6,8 +6,10 @@ For a more detailed desccription about the template, please refer to **_DAOlytic
 
 The Dashboard is hosted live **[here](https://covalent-dao.vercel.app/)**.
 
-You can find a short demo video of the Dashboard [here]().
+You can find a short demo video of the Dashboard **[here](https://www.youtube.com/watch?v=8rgz9Y02Qt8)**.
 
+
+#Running the app
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
