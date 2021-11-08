@@ -11,16 +11,19 @@ import {
 // Mui
 import Paper from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
+import { default as MuiTooltip } from "@mui/material/Tooltip";
 
 // Utils
 import { numbersWithCommas, abbrNumber } from "../../utils/numbers";
 
-export default function LineGraph({ title, data, color, keyX, keyY }) {
+export default function LineGraph({ title, data, color, keyX, keyY, tooltip }) {
   return (
     <Paper elevation={10}>
-      <Typography variant="h5" gutterBottom m={1} align="center">
-        {title}
-      </Typography>
+      <MuiTooltip title={tooltip}>
+        <Typography variant="h5" gutterBottom m={1} align="center">
+          {title}
+        </Typography>
+      </MuiTooltip>
       <ResponsiveContainer width="100%" aspect={2.5}>
         <AreaChart
           width={500}

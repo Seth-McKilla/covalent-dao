@@ -11,7 +11,7 @@ import _ from "lodash";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 import { green, red, grey } from "@mui/material/colors";
 // @ Icons
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
@@ -34,8 +34,6 @@ import {
 import { numbersWithCommas } from "../../../utils/numbers";
 
 export default function DaoDashboard() {
-  const theme = useTheme();
-
   const {
     query: { chainId, contractAddress },
     isReady,
@@ -85,8 +83,6 @@ export default function DaoDashboard() {
       `/api/v1/get-gini-idx?chainId=${chainId}&contractId=${contractAddress}&ticker=${dao.contractTicker}`,
     fetcher
   );
-
-  console.log(gini);
 
   const dataLoaded =
     !!tokenHolders &&
@@ -155,6 +151,7 @@ export default function DaoDashboard() {
                     },
                   ]}
                   title="Sentiment Analysis"
+                  tooltip="Calculates the sentiment of DAO using Twitter data. Restricted to 100 tweets for current version."
                 />
               </Grid>
               <Grid item xs={3}>
@@ -163,14 +160,18 @@ export default function DaoDashboard() {
                   value={`$${quoteRate}`}
                   valueColor={green[500]}
                   Icon={AttachMoneyIcon}
+                  tooltip="The current quote rate for the DAO token."
                 />
               </Grid>
               <Grid item xs={3}>
                 <StatCard
-                  title="Diluted Market Capitalization"
-                  value={`$${numbersWithCommas(tokenHolders.mkt_cap)}`}
+                  title="Fully Diluted Market Capitalization"
+                  value={`$${numbersWithCommas(
+                    Number(tokenHolders.mkt_cap).toFixed(0)
+                  )}`}
                   valueColor={green[500]}
                   Icon={AccountBalanceIcon}
+                  tooltip="The market capitalization (valuation) if the max supply of a coin is in circulation. It is equal to Current Price x Max Supply."
                 />
               </Grid>
               <Grid item xs={3}>
@@ -178,6 +179,7 @@ export default function DaoDashboard() {
                   title="Total Number of Members"
                   value={numbersWithCommas(tokenHolders.total_count)}
                   Icon={GroupIcon}
+                  tooltip="The total number of members in the DAO."
                 />
               </Grid>
 
@@ -188,6 +190,7 @@ export default function DaoDashboard() {
                   color={green[500]}
                   keyX="date"
                   keyY="transactions"
+                  tooltip="The number of transactions per day for the past 250 transactions."
                 />
               </Grid>
               <Grid item xs={4}>
@@ -198,9 +201,11 @@ export default function DaoDashboard() {
                   elevation={10}
                 >
                   <Grid item xs={12}>
-                    <Typography variant="h5" m={1} align="center">
-                      Voting Power Concentration (Current Gini Coefficient)
-                    </Typography>
+                    <Tooltip title="Shows the inequality in the distribution of power in a DAO. A value of 0 indicates perfect equality and a value of 1 indicates maximal inequality.">
+                      <Typography variant="h5" m={1} align="center">
+                        Voting Power Concentration (Current Gini Coefficient)
+                      </Typography>
+                    </Tooltip>
                   </Grid>
                   <Grid item xs={12}>
                     <Typography variant="h2" m={1} align="center">
@@ -214,6 +219,7 @@ export default function DaoDashboard() {
                 <PieChartHolders
                   title="Top 25 Token Holders"
                   data={tokenHolders.token_holders}
+                  tooltip="The top 25 token holders in the DAO."
                 />
               </Grid>
             </Grid>

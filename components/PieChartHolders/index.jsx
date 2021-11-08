@@ -9,6 +9,7 @@ import {
 // Mui
 import Paper from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 import { blue, purple, green, orange, brown } from "@mui/material/colors";
 
 // Components
@@ -31,7 +32,7 @@ const getColorShades = () => {
   return colorShades;
 };
 
-export default function PieChartHolders({ data, title }) {
+export default function PieChartHolders({ data, title, tooltip }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const COLORS = getColorShades();
@@ -48,9 +49,11 @@ export default function PieChartHolders({ data, title }) {
 
   return (
     <Paper elevation={10}>
-      <Typography variant="h5" align="center" gutterBottom>
-        {title}
-      </Typography>
+      <Tooltip title={tooltip}>
+        <Typography variant="h5" align="center" gutterBottom>
+          {title}
+        </Typography>
+      </Tooltip>
       <ResponsiveContainer width="100%" aspect={3}>
         <RePieChart>
           <Pie

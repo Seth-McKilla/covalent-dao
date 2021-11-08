@@ -3,9 +3,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 import { useTheme } from "@mui/material";
 
-export default function StatCard({ title, value, valueColor, Icon }) {
+export default function StatCard({ title, value, valueColor, Icon, tooltip }) {
   const theme = useTheme();
   const primaryColor = theme.palette.primary.main;
   const secondaryColor = theme.palette.secondary.main;
@@ -36,7 +37,11 @@ export default function StatCard({ title, value, valueColor, Icon }) {
   return (
     <Card elevation={10} sx={styles.container}>
       <Icon sx={styles.icon} />
-      <CardHeader title={title} sx={styles.header} />
+      <CardContent sx={styles.header}>
+        <Tooltip title={tooltip}>
+          <Typography variant="h5">{title}</Typography>
+        </Tooltip>
+      </CardContent>
       <CardContent>
         <Typography
           variant="h4"

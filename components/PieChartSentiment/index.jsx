@@ -9,11 +9,12 @@ import {
 // Mui
 import Paper from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 
 // Components
 import RenderActiveShape from "./RenderActiveShape";
 
-export default function PieChartSentiment({ data, title }) {
+export default function PieChartSentiment({ data, title, tooltip }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const onPieEnter = (_, index) => setActiveIndex(index);
@@ -41,9 +42,11 @@ export default function PieChartSentiment({ data, title }) {
           </Pie>
         </RePieChart>
       </ResponsiveContainer>
-      <Typography variant="h5" align="center" gutterBottom>
-        {title}
-      </Typography>
+      <Tooltip title={tooltip}>
+        <Typography variant="h5" align="center" gutterBottom>
+          {title}
+        </Typography>
+      </Tooltip>
     </Paper>
   );
 }
