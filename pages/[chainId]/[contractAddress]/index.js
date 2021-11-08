@@ -82,6 +82,12 @@ export default function DaoDashboard() {
 
   const dataLoaded = !!tokenHolders && !!spotPrices && !!transactionsByDate;
 
+  // Helper functions
+  const getSentiment = (type) => {
+    if (!sentiment) return 0;
+    return Number(sentiment[type]);
+  };
+
   return (
     <div>
       <Head>
@@ -121,17 +127,17 @@ export default function DaoDashboard() {
                   data={[
                     {
                       name: "Positive 😊",
-                      value: Number(sentiment["positive"]),
+                      value: getSentiment("positive"),
                       color: green[500],
                     },
                     {
                       name: "Negative 😢",
-                      value: Number(sentiment["negative"]),
+                      value: getSentiment("negative"),
                       color: red[500],
                     },
                     {
                       name: "Neutral 😐",
-                      value: Number(sentiment["neutral"]),
+                      value: getSentiment("neutral"),
                       color: grey[600],
                     },
                   ]}

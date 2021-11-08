@@ -5,7 +5,7 @@ from http.server import BaseHTTPRequestHandler
 from textblob import TextBlob
 import tweepy
 import nltk
-nltk.download("vader_lexicon")
+nltk.download("vader_lexicon",download_dir="nltk_data/")
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import json
