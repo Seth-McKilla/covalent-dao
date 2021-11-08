@@ -2,7 +2,7 @@ This repo is a submission for the [DAO Analytics Dashboard Template](https://git
 
 #DAOlytics
 Daolytics is a basic open source, multi-chain compatible, DAO Analytics Dashboard Template, powered by the Covalent API.
-For a more detailed desccription about the template, please refer to **_DAOlytics.pdf_** file in this repository.
+For a more detailed desccription about the template, please refer to **_[DAOlytics.pdf](https://github.com/Seth-McKilla/covalent-dao/blob/main/DAOlytics.pdf)_** file in this repository.
 
 The Dashboard is hosted live **[here](https://covalent-dao.vercel.app/)**.
 
