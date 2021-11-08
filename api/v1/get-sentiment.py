@@ -4,10 +4,6 @@ from urllib.parse import parse_qs, urlparse
 from http.server import BaseHTTPRequestHandler
 from textblob import TextBlob
 import tweepy
-import nltk
-nltk.download("vader_lexicon",download_dir="nltk_data/")
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import json
 
 # Environment Variables
@@ -35,41 +31,27 @@ class handler(BaseHTTPRequestHandler):
 
     # Number of Tweets fetched is set to 100 (Limitation of the API)
     tweets = api.search_tweets(q=keyword, count=100)
-    positive = 0
-    negative = 0
-    neutral = 0
-    polarity = 0
-    tweet_list = []
-    neutral_list = []
-    negative_list = []
-    positive_list = []
+ 
+    positive = []
+    negative = []
+    neutral = []
 
     for tweet in tweets:
-      tweet_list.append(tweet.text)
-      analysis = TextBlob(tweet.text)
-      score = SentimentIntensityAnalyzer().polarity_scores(tweet.text)
-      neg = score["neg"]
-      pos = score["pos"]
-      polarity += analysis.sentiment.polarity
-      
-      if neg > pos:
-        negative_list.append(tweet.text)
-        negative += 1
-      elif pos > neg:
-        positive_list.append(tweet.text)
-        positive += 1
-      
-      elif pos == neg:
-        neutral_list.append(tweet.text)
-        neutral += 1
+      analysis = TextBlob(tweet.text)    
+      x1 = analysis.sentiment.polarity
+      if x1 > 0:
+          positive.append(x1)
+      elif x1 < 0:
+          negative.append(x1)
+      else:
+          neutral.append(x1)
         
-    positive = percentage(positive, 100)
-    negative = percentage(negative, 100)
-    neutral = percentage(neutral, 100)
-    polarity = percentage(polarity, 100)
-    positive = format(positive, ".1f")
-    negative = format(negative, ".1f")
-    neutral = format(neutral, ".1f")
+    positive = percentage(len(positive), 100)
+    negative = percentage(len(negative), 100)
+    neutral = percentage(len(neutral), 100)
+    positive = format(positive, '.1f')
+    negative = format(negative, '.1f')
+    neutral = format(neutral, '.1f')
 
     self.wfile.write(json.dumps({
       "positive": positive,
