@@ -1,15 +1,17 @@
 import os
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 from urllib.parse import parse_qs, urlparse
 from http.server import BaseHTTPRequestHandler
 from textblob import TextBlob
 import tweepy
+import nltk
+nltk.download("vader_lexicon",download_dir="nltk_data/")
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import json
 
 # Environment Variables
-load_dotenv(find_dotenv())
+load_dotenv()
 TWITTER_CONSUMER_KEY = os.getenv("TWITTER_CONSUMER_KEY")
 TWITTER_CONSUMER_SECRET = os.getenv("TWITTER_CONSUMER_SECRET")
 TWITTER_ACCESS_TOKEN = os.getenv("TWITTER_ACCESS_TOKEN")

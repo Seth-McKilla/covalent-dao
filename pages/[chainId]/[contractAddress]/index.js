@@ -80,7 +80,17 @@ export default function DaoDashboard() {
     fetcher
   );
 
-  const dataLoaded = !!tokenHolders && !!spotPrices && !!transactionsByDate;
+  // @ Gini Index
+  const { data: gini } = useSWR(
+    isReady &&
+      `/api/v1/get-gini-idx?chainId=${chainId}&contractId=${contractAddress}&ticker=${dao.contractTicker}`,
+    fetcher
+  );
+
+  console.log(gini);
+
+  const dataLoaded =
+    !!tokenHolders && !!spotPrices && !!transactionsByDate && !!gini;
 
   // Helper functions
   const getSentiment = (type) => {
