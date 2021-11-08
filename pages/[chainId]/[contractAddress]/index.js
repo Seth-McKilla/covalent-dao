@@ -22,11 +22,11 @@ import { DashboardLayout } from "../../../layouts";
 
 // Components
 import {
-  PieChart,
+  PieChartSentiment,
+  PieChartHolders,
   StatCard,
   LineGraph,
   Loader,
-  BasicTable,
 } from "../../../components";
 
 // Utils
@@ -87,10 +87,12 @@ export default function DaoDashboard() {
     fetcher
   );
 
-  console.log(gini);
-
   const dataLoaded =
-    !!tokenHolders && !!spotPrices && !!transactionsByDate && !!gini;
+    !!tokenHolders &&
+    !!spotPrices &&
+    !!transactionsByDate &&
+    !!sentiment &&
+    !!gini;
 
   // Helper functions
   const getSentiment = (type) => {
@@ -133,7 +135,7 @@ export default function DaoDashboard() {
           ) : (
             <Grid container spacing={3} maxWidth="lg">
               <Grid item xs={3}>
-                <PieChart
+                <PieChartSentiment
                   data={[
                     {
                       name: "Positive 😊",
@@ -197,10 +199,10 @@ export default function DaoDashboard() {
                 />
               </Grid>
 
-              <Grid item xs={12}>
-                <BasicTable
-                  title="Top Token Holders"
-                  rows={tokenHolders.token_holders}
+              <Grid item xs={12} sx={{ maxHeight: 200 }}>
+                <PieChartHolders
+                  title="Top 25 Token Holders"
+                  data={tokenHolders.token_holders}
                 />
               </Grid>
             </Grid>

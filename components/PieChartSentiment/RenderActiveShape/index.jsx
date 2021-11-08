@@ -1,11 +1,9 @@
 import { Sector } from "recharts";
 
 export default function RenderActiveShape(props) {
-  const RADIAN = Math.PI / 180;
   const {
     cx,
     cy,
-    midAngle,
     innerRadius,
     outerRadius,
     startAngle,
@@ -14,8 +12,6 @@ export default function RenderActiveShape(props) {
     payload,
     percent,
   } = props;
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
 
   return (
     <g>

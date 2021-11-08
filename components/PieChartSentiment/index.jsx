@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 // Components
 import RenderActiveShape from "./RenderActiveShape";
 
-export default function PieChart({ data, title }) {
+export default function PieChartSentiment({ data, title }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const onPieEnter = (_, index) => setActiveIndex(index);
