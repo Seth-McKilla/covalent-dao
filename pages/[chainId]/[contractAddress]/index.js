@@ -9,6 +9,7 @@ import _ from "lodash";
 
 // Mui
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material";
 import { green, red, grey } from "@mui/material/colors";
@@ -35,7 +36,6 @@ import dummyData from "../../../temp/dummyData";
 
 export default function DaoDashboard() {
   const theme = useTheme();
-  const secondaryColor = theme.palette.secondary.main;
 
   const {
     query: { chainId, contractAddress },
@@ -86,6 +86,8 @@ export default function DaoDashboard() {
       `/api/v1/get-gini-idx?chainId=${chainId}&contractId=${contractAddress}&ticker=${dao.contractTicker}`,
     fetcher
   );
+
+  console.log(gini);
 
   const dataLoaded =
     !!tokenHolders &&
@@ -180,7 +182,7 @@ export default function DaoDashboard() {
                 />
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={8}>
                 <LineGraph
                   title="Overall Activity"
                   data={transactionsByDate.transactions}
@@ -189,14 +191,24 @@ export default function DaoDashboard() {
                   keyY="transactions"
                 />
               </Grid>
-              <Grid item xs={6}>
-                <LineGraph
-                  title="Voting Power Concentration"
-                  data={dummyData.giniIndex}
-                  color={secondaryColor}
-                  keyX="month"
-                  keyY="Gini-Idx"
-                />
+              <Grid item xs={4}>
+                <Grid
+                  component={Paper}
+                  container
+                  sx={{ height: "100%" }}
+                  elevation={10}
+                >
+                  <Grid item xs={12}>
+                    <Typography variant="h5" m={1} align="center">
+                      Voting Power Concentration (Current Gini Coefficient)
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography variant="h2" m={1} align="center">
+                      {gini.giniIdx.toFixed(4)}
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Grid>
 
               <Grid item xs={12} sx={{ maxHeight: 200 }}>
