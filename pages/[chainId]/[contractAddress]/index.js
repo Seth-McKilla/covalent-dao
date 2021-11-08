@@ -11,12 +11,11 @@ import _ from "lodash";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material";
-import { green } from "@mui/material/colors";
+import { green, red, grey } from "@mui/material/colors";
 // @ Icons
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import GroupIcon from "@mui/icons-material/Group";
-// @ Theme
 
 // Layout
 import { DashboardLayout } from "../../../layouts";
@@ -26,7 +25,6 @@ import {
   PieChart,
   StatCard,
   LineGraph,
-  BarGraph,
   Loader,
   BasicTable,
 } from "../../../components";
@@ -37,7 +35,6 @@ import dummyData from "../../../temp/dummyData";
 
 export default function DaoDashboard() {
   const theme = useTheme();
-  const primaryColor = theme.palette.primary.main;
   const secondaryColor = theme.palette.secondary.main;
 
   const {
@@ -73,6 +70,13 @@ export default function DaoDashboard() {
   const { data: transactionsByDate } = useSWR(
     isReady &&
       `/api/v1/get-transactions?chainId=${chainId}&contractId=${contractAddress}`,
+    fetcher
+  );
+
+  // @ Sentiment Analysis
+  const { data: sentiment } = useSWR(
+    isReady &&
+      `/api/v1/get-sentiment?keyword=${dao.contractName.replace("Token", "")}`,
     fetcher
   );
 
@@ -114,7 +118,23 @@ export default function DaoDashboard() {
             <Grid container spacing={3} maxWidth="lg">
               <Grid item xs={3}>
                 <PieChart
-                  data={dummyData.sentiment}
+                  data={[
+                    {
+                      name: "Positive 😊",
+                      value: Number(sentiment["positive"]),
+                      color: green[500],
+                    },
+                    {
+                      name: "Negative 😢",
+                      value: Number(sentiment["negative"]),
+                      color: red[500],
+                    },
+                    {
+                      name: "Neutral 😐",
+                      value: Number(sentiment["neutral"]),
+                      color: grey[600],
+                    },
+                  ]}
                   title="Sentiment Analysis"
                 />
               </Grid>

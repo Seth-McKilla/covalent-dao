@@ -1,7 +1,5 @@
 requests
 textblob
 tweepy
-langdetect
 nltk
-sklearn
 python-dotenv
