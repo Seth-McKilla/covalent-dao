@@ -1,3 +1,5 @@
+export { default as BgImage } from "./BgImage";
+export { default as AppBar } from "./AppBar";
 export { default as Navigation } from "./Navigation";
 export { default as DaoCard } from "./DaoCard";
 export { default as PieChartSentiment } from "./PieChartSentiment";

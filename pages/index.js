@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import { LandingLayout } from "../layouts";
 
 // Components
-import { DaoCard } from "../components";
+import { BgImage, DaoCard } from "../components";
 
 export default function Home({ daos }) {
   return (
@@ -34,25 +34,7 @@ export default function Home({ daos }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div // Darken background image
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.50)",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 5,
-        }}
-      />
-
-      <Image
-        src="/network.jpg"
-        alt="network nodes"
-        layout="fill"
-        objectFit="cover"
-        objectPosition="center"
-      />
+      <BgImage />
 
       <LandingLayout>
         <Grid item xs={12} align="center" sx={{ color: "#fff", zIndex: 10 }}>
