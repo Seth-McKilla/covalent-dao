@@ -1,4 +1,6 @@
-// import { useState } from "react";
+import { useCallback, useEffect, useContext } from "react";
+import { Context } from "../../context";
+import web3Modal from "../../web3";
 
 // Mui
 import { default as MuiAppBar } from "@mui/material/AppBar";
@@ -7,11 +9,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-// Hooks
-import { web3Connect } from "../../web3";
-
 export default function AppBar() {
-  //   const [modalOpen, setModalOpen] = useState(false);
+  const { state, dispatch } = useContext(Context);
+  console.log(state);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

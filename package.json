@@ -13,6 +13,8 @@
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
+    "@walletconnect/web3-provider": "^1.6.6",
+    "ethers": "^5.5.1",
     "framer-motion": "^4.1.17",
     "lodash": "^4.17.21",
     "next": "11.1.2",
@@ -21,7 +23,8 @@
     "react-json-pretty": "^2.2.0",
     "recharts": "^2.1.6",
     "swr": "^1.0.1",
-    "web3": "^1.6.1",
+    "walletlink": "^2.2.8",
+    "web3": "^0.20.7",
     "web3modal": "^1.9.4"
   },
   "devDependencies": {
