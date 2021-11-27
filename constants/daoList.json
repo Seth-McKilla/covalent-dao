@@ -1,27 +1,6 @@
 [
   {
     "chainId": "1",
-    "contractName": "Gitcoin",
-    "contractTicker": "GTC",
-    "contractAddress": "0xde30da39c46104798bb5aa3fe8b9e0e1f348163f",
-    "logoUrl": "https://logos.covalenthq.com/tokens/0xde30da39c46104798bb5aa3fe8b9e0e1f348163f.png"
-  },
-  {
-    "chainId": "1",
-    "contractName": "Radicle",
-    "contractTicker": "RAD",
-    "contractAddress": "0x31c8eacbffdd875c74b94b077895bd78cf1e64a3",
-    "logoUrl": "https://logos.covalenthq.com/tokens/0x31c8eacbffdd875c74b94b077895bd78cf1e64a3.png"
-  },
-  {
-    "chainId": "1",
-    "contractName": "pNetwork Token",
-    "contractTicker": "PNT",
-    "contractAddress": "0x89ab32156e46f46d02ade3fecbe5fc4243b9aaed",
-    "logoUrl": "https://logos.covalenthq.com/tokens/0x89ab32156e46f46d02ade3fecbe5fc4243b9aaed.png"
-  },
-  {
-    "chainId": "1",
     "contractName": "StakeWise",
     "contractTicker": "SWISE",
     "contractAddress": "0x48c3399719b582dd63eb5aadf12a40b4c3f52fa2",
