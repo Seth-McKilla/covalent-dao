@@ -15,7 +15,7 @@ import { LandingLayout } from "../layouts";
 
 // Components
 import { DaoCard } from "../components";
-import Sidebar from "../components/SideBar/sidebar.tsx";
+import Sidebar from "../components/SideBar/sidebar.jsx";
 
 export default function Home({ daos }) {
   return (
@@ -32,9 +32,7 @@ export default function Home({ daos }) {
 
       <Sidebar />
 
-      
-      
-     {/* <LandingLayout>
+      {/* <LandingLayout>
         <Box item xs={12} align="center" bg={useColorModeValue("white", "gray.800")} sx={{ color: "#fff", zIndex: 10 }}>
           <Box container spacing={2} mt={5}>
             {daos.length === 0

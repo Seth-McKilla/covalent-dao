@@ -22,15 +22,19 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
-
-import { AiFillSignal, AiFillFilePpt, AiOutlineWechat, AiOutlineTeam, AiOutlineCalendar } from "react-icons/ai";
-import { FaTwitter, FaDiscord, FaGithub } from 'react-icons/fa';
+import {
+  AiFillSignal,
+  AiFillFilePpt,
+  AiOutlineWechat,
+  AiOutlineTeam,
+  AiOutlineCalendar,
+} from "react-icons/ai";
+import { FaTwitter, FaDiscord, FaGithub } from "react-icons/fa";
 import { FiMenu, FiSearch } from "react-icons/fi";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { ChevronLeftIcon } from '@chakra-ui/icons'
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 
-import {SocialLinks} from "..";
-import React, {ReactNode} from "react";
+import { SocialLinks } from "..";
 //import CardDao from "../DaoCard/cardDoa";
 //import { Logo } from "logo";
 
@@ -39,7 +43,7 @@ export default function Sidebar() {
   const integrations = useDisclosure();
   const { toggleColorMode: toggleMode } = useColorMode();
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
-  const text = useColorModeValue("dark", "light"); 
+  const text = useColorModeValue("dark", "light");
 
   const NavItem = (props) => {
     const { icon, children, ...rest } = props;
@@ -116,7 +120,7 @@ export default function Sidebar() {
         <NavItem icon={AiOutlineTeam}>Token Holders</NavItem>
         <NavItem icon={AiOutlineCalendar}>Events</NavItem>
       </Flex>
-      
+
       <Flex
         pt={260}
         pr={2}
@@ -128,19 +132,21 @@ export default function Sidebar() {
         aria-label="Main Navigation"
       >
         <Button
-              height='45px'
-              width='150px'
-              borderRadius="full"
-              borderWidth={2}
-              colorScheme="purple"
-              size="md"
-              fontSize="lg"
-              leftIcon={<ChevronLeftIcon />}
-            >DAOs List</Button>
+          height="45px"
+          width="150px"
+          borderRadius="full"
+          borderWidth={2}
+          colorScheme="purple"
+          size="md"
+          fontSize="lg"
+          leftIcon={<ChevronLeftIcon />}
+        >
+          DAOs List
+        </Button>
       </Flex>
-          
-       <SocialLinks /> 
-      
+
+      <SocialLinks />
+
       <Flex
         pt={3}
         pr={2}
@@ -151,17 +157,17 @@ export default function Sidebar() {
         color="gray.600"
         aria-label="Main Navigation"
       >
-      <IconButton
-              borderRadius="full"
-              borderWidth={2}
-              colorScheme="purple"
-              size="md"
-              fontSize="lg"
-              aria-label={`Switch to ${text} mode`}
-              ml={{ base: "0", md: "3" }}
-              onClick={toggleMode}
-              icon={<SwitchIcon />}
-            />
+        <IconButton
+          borderRadius="full"
+          borderWidth={2}
+          colorScheme="purple"
+          size="md"
+          fontSize="lg"
+          aria-label={`Switch to ${text} mode`}
+          ml={{ base: "0", md: "3" }}
+          onClick={toggleMode}
+          icon={<SwitchIcon />}
+        />
       </Flex>
     </Box>
   );
@@ -207,23 +213,24 @@ export default function Sidebar() {
           </InputGroup>
            */}
           <Box
-          as="iframe"
-          src="https://coinhippo.io?widget=price-marquee&theme=?"
-          title="Price Update"
-          frameBorder="0"
-          width="100%"
-          height="35"
+            as="iframe"
+            src="https://coinhippo.io?widget=price-marquee&theme=?"
+            title="Price Update"
+            frameBorder="0"
+            width="100%"
+            height="35"
           />
 
           <Flex align="center">
-            <Button colorScheme='purple' variant='outline'
-            >Connect Wallet</Button>
+            <Button colorScheme="purple" variant="outline">
+              Connect Wallet
+            </Button>
           </Flex>
         </Flex>
 
         <Box as="main" p="4">
           {/* Add content here, remove div below  */}
-          
+
           {/* <CardDao name={undefined} ticker={undefined} price={undefined} imgUrl={undefined} />  */}
         </Box>
       </Box>
