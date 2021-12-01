@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
+    "@chakra-ui/icons": "^1.1.1",
+    "@chakra-ui/react": "^1.7.2",
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
     "framer-motion": "^4.1.17",
@@ -18,6 +20,7 @@
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
     "react-json-pretty": "^2.2.0",
     "recharts": "^2.1.6",
     "swr": "^1.0.1"

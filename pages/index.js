@@ -1,29 +1,25 @@
 import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
+//import Link from "next/link";
+//import Image from "next/image";
 import daoList from "../constants/daoList";
 
+import { Box, useColorModeValue } from "@chakra-ui/react";
+
 // Mui
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+//import Box from "@mui/material/Box";
+//import Grid from "@mui/material/Grid";
+//import Typography from "@mui/material/Typography";
 
 // Layout
 import { LandingLayout } from "../layouts";
 
 // Components
 import { DaoCard } from "../components";
+import Sidebar from "../components/SideBar/sidebar.tsx";
 
 export default function Home({ daos }) {
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
+    <div>
       <Head>
         <title>Covalent DAO Dashboard</title>
         <meta name="description" content="DAO Analytics Dashboard" />
@@ -34,57 +30,17 @@ export default function Home({ daos }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div // Darken background image
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.50)",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 5,
-        }}
-      />
+      <Sidebar />
 
-      <Image
-        src="/network.jpg"
-        alt="network nodes"
-        layout="fill"
-        objectFit="cover"
-        objectPosition="center"
-      />
-
-      <LandingLayout>
-        <Grid item xs={12} align="center" sx={{ color: "#fff", zIndex: 10 }}>
-          <Typography variant="h2" gutterBottom>
-            Welcome to DAOlytics
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "row",
-            }}
-          >
-            <Typography variant="h4" mr={2}>
-              The DAO Analytics Dashboard powered by
-            </Typography>
-            <Link href="https://www.covalenthq.com/" passHref>
-              <a>
-                <Image
-                  src="https://www.covalenthq.com/static/images/covalent-logo-tri.svg"
-                  height={50}
-                  width={200}
-                  alt="Covalent-logo"
-                />
-              </a>
-            </Link>
-          </Box>
-          <Grid container spacing={2} mt={5}>
+      
+      
+     {/* <LandingLayout>
+        <Box item xs={12} align="center" bg={useColorModeValue("white", "gray.800")} sx={{ color: "#fff", zIndex: 10 }}>
+          <Box container spacing={2} mt={5}>
             {daos.length === 0
               ? "Error fetching DAOs"
               : daos.map((dao) => (
-                  <Grid item xs={3} key={dao.contract_name}>
+                  <Box item xs={3} key={dao.contract_name}>
                     <DaoCard
                       name={dao.contract_name}
                       ticker={dao.contract_ticker_symbol}
@@ -92,11 +48,11 @@ export default function Home({ daos }) {
                       address={dao.contract_address}
                       imgUrl={dao.logo_url}
                     />
-                  </Grid>
+                  </Box>
                 ))}
-          </Grid>
-        </Grid>
-      </LandingLayout>
+          </Box>
+        </Box>
+      </LandingLayout>  */}
     </div>
   );
 }

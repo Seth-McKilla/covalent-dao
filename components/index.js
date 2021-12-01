@@ -7,3 +7,5 @@ export { default as LineGraph } from "./LineGraph";
 export { default as BarGraph } from "./BarGraph";
 export { default as Loader } from "./Loader";
 export { default as BasicTable } from "./BasicTable";
+export { default as SocialLinks } from "./SocialLinks";
+
