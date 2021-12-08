@@ -26,5 +26,12 @@
     "contractTicker": "SWISE",
     "contractAddress": "0x48c3399719b582dd63eb5aadf12a40b4c3f52fa2",
     "logoUrl": "https://logos.covalenthq.com/tokens/0x48c3399719b582dd63eb5aadf12a40b4c3f52fa2.png"
+  },
+  {
+    "chainId": "43114",
+    "contractName": "Everest",
+    "contractTicker": "EVRT",
+    "contractAddress": "0x3ACa5545e76746A3Fe13eA66B24BC0eBcC51E6b4",
+    "logoUrl": "https://logos.covalenthq.com/tokens/0x48c3399719b582dd63eb5aadf12a40b4c3f52fa2.png"
   }
 ]
